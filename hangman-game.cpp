@@ -5,7 +5,7 @@
 
 // Prototyping functions
 char guessLetter();
-bool compareLetters();
+bool checkLetterInWord(std::string randomWord, char guessedLetter);
 
 // Main
 int main()
@@ -26,14 +26,30 @@ int main()
     int randomIndex = std::rand() % 13;
 
     // Randomly pick word
-    std::string word = words[randomIndex];
+    // std::string randomWord = words[randomIndex];
 
-    //* Console output: *
+    // Interim: Use "Number" as fixed word
+    std::string randomWord = "Number";
+
+    // Initialize some new variables
     char letter;
-    letter = guessLetter();
+    int timesGuessed = 0;
+    if (timesGuessed < 8)
+    {
+        // Let the player guess a word
+        letter = guessLetter();
 
-    std::cout << "Your letter: " << letter << std::endl;
-    // std::cout << words[randomIndex] << std::endl;
+        // Check if the letter is in the set word
+        bool checkForLetter;
+        checkForLetter = checkLetterInWord(randomWord, letter);
+        if (checkForLetter == true)
+        {
+        }
+        else
+        {
+            timesGuessed += 1;
+        }
+    };
 
     return 0;
 }
@@ -43,19 +59,32 @@ char guessLetter()
 {
     char guessedLetter;
     std::cout << "Guess a letter: "; // Type a number and press enter
-    std::cin >> guessedLetter;       // Get user input from the keyboard
 
-    // Remove from pool of possible letters and check if already picked ! {a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z}
+    // @@ Check if guessed letter is an actual letter (case-sensitive, symbols, umlaute)
+
+    std::cin >> guessedLetter; // Get user input from the keyboard
+
+    // @@ Remove from pool of possible letters and check if already picked ! {a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z}
 
     return guessedLetter;
 };
 
-// // Check if the picked letter is part of the randomly picked word
-// bool checkLetterInWord(std::string word, char guessedLetter){
-//     // if isinword: return true
-//     // else: return false
-// };
+// Check if the picked letter is part of the randomly picked word
+bool checkLetterInWord(std::string randomWord, char guessedLetter)
+{
+    // @@ Make randomWord, guessesdLetter small
 
-// @@@
-// Depending on outcome -> add one to 7 limit counter;
-// or replace hidden message with correct one: how would this be done?
+    if (randomWord.find(guessedLetter) != std::string::npos)
+    {
+        std::cout << "The guessed letter is part of " << randomWord << std::endl;
+
+        // @@@ int indexRandomWord = randomWord.find(guessedLetter);
+        // --> Call by reference: change value of CorrectlyGuessedLetters
+    }
+    else
+    {
+        std::cout << "WRONG: " << randomWord << std::endl;
+        return false;
+    };
+    return true;
+};
