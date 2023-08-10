@@ -29,13 +29,24 @@ int main()
     // std::string randomWord = words[randomIndex];
 
     // Interim: Use "Number" as fixed word
-    std::string randomWord = "Number";
+    std::string randomWord = "Pointer";
 
-    // Initialize some new variables
+    // Initialize new variables
+    // Generate preview using the length of the randomly generated word
+    std::string preview = "[ _";
+    for (int i = 0; i < randomWord.length() - 1; i++)
+    {
+        preview += " _";
+    }
+    preview += " ]";
+
     char letter;
     int timesGuessed = 0;
     if (timesGuessed < 8)
     {
+        // @@ Print the CorrectlyGuessedWord up until this point
+        //
+
         // Let the player guess a word
         letter = guessLetter();
 
@@ -64,7 +75,7 @@ char guessLetter()
 
     std::cin >> guessedLetter; // Get user input from the keyboard
 
-    // @@ Remove from pool of possible letters and check if already picked ! {a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z}
+    // @@ Remove from pool of possible letters (by check if already picked) ! {a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z}
 
     return guessedLetter;
 };
@@ -74,6 +85,7 @@ bool checkLetterInWord(std::string randomWord, char guessedLetter)
 {
     // @@ Make randomWord, guessesdLetter small
 
+    // Check if the guessedLetter is in in the randomWord
     if (randomWord.find(guessedLetter) != std::string::npos)
     {
         std::cout << "The guessed letter is part of " << randomWord << std::endl;
