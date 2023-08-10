@@ -2,9 +2,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <ctype.h>
+
+#include <algorithm>
 
 // Prototyping functions
-char guessLetter();
+// @@@ Call by reference?
+char guessLetter(std::string &letters);
 bool checkLetterInWord(std::string randomWord, char guessedLetter);
 
 // Main
@@ -15,6 +19,11 @@ int main()
     std::string words[13] = {"Squat", "Dinner", "Laser", "Button",
                              "Explorer", "Empty", "Assist", "Number",
                              "Sunny", "Ranger", "Messy", "Robot", "Pointer"};
+
+    std::string alphabetLetters[26] = {"a", "b", "c", "d", "e", "f", "g", "h",
+                                       "i", "j", "k", "l", "m", "n", "o", "p",
+                                       "q", "r", "s", "t", "u", "v", "w", "x",
+                                       "y", "z"};
 
     //* Initialize random seed for the rand function: *
     // The random seed is initialized to a value
@@ -33,6 +42,7 @@ int main()
 
     // Initialize new variables
     // Generate preview using the length of the randomly generated word
+    // Letters at position: 3, 5, 7, 9, ...
     std::string preview = "[ _";
     for (int i = 0; i < randomWord.length() - 1; i++)
     {
@@ -47,8 +57,8 @@ int main()
         // @@ Print the CorrectlyGuessedWord up until this point
         //
 
-        // Let the player guess a word
-        letter = guessLetter();
+        // @@@ Let the player guess a word
+        letter = guessLetter(alphabetLetters[26]);
 
         // Check if the letter is in the set word
         bool checkForLetter;
@@ -60,21 +70,30 @@ int main()
         {
             timesGuessed += 1;
         }
+
+        // @@ Print lives left/timesGuessed
     };
 
     return 0;
 }
 
 // Defining functions
-char guessLetter()
+// @@@ Call by reference?
+char guessLetter(std::string &letters)
 {
     char guessedLetter;
-    std::cout << "Guess a letter: "; // Type a number and press enter
+    do
+    {
+        std::cout << "Guess a letter: "; // Type a number and press enter
+        std::cin >> guessedLetter;       // Get user input from the keyboard
 
-    // @@ Check if guessed letter is an actual letter (case-sensitive, symbols, umlaute)
+        // Checks if the letter isalphabet
+        // LIMIT TO ONE letter
+        if (!isalpha(guessedLetter))
+            printf("Make sure you pick a valid letter, i.e. (a-z)\n");
+    } while (!isalpha(guessedLetter));
 
-    std::cin >> guessedLetter; // Get user input from the keyboard
-
+    letters.erase(remove(letters.begin(), letters.end(), guessedLetter), letters.end()); // remove A from string
     // @@ Remove from pool of possible letters (by check if already picked) ! {a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z}
 
     return guessedLetter;
