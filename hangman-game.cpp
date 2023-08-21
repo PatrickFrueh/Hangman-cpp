@@ -20,6 +20,7 @@ int main()
                              "Explorer", "Empty", "Assist", "Number",
                              "Sunny", "Ranger", "Messy", "Robot", "Pointer"};
 
+    // Letters that have NOT been picked
     std::string alphabetLetters[26] = {"a", "b", "c", "d", "e", "f", "g", "h",
                                        "i", "j", "k", "l", "m", "n", "o", "p",
                                        "q", "r", "s", "t", "u", "v", "w", "x",
@@ -57,7 +58,7 @@ int main()
         // @@ Print the CorrectlyGuessedWord up until this point
         //
 
-        // @@@ Let the player guess a word
+        // @@@ Let the player guess a letter
         letter = guessLetter(alphabetLetters[26]);
 
         // Check if the letter is in the set word
@@ -82,19 +83,32 @@ int main()
 char guessLetter(std::string &letters)
 {
     char guessedLetter;
+
     do
     {
         std::cout << "Guess a letter: "; // Type a number and press enter
         std::cin >> guessedLetter;       // Get user input from the keyboard
 
-        // Checks if the letter isalphabet
-        // LIMIT TO ONE letter
-        if (!isalpha(guessedLetter))
-            printf("Make sure you pick a valid letter, i.e. (a-z)\n");
-    } while (!isalpha(guessedLetter));
+        // @@@ LIMIT TO ONE letter
 
-    letters.erase(remove(letters.begin(), letters.end(), guessedLetter), letters.end()); // remove A from string
+        // Checks if the letter isalphabet
+        if (!isalpha(guessedLetter))
+        {
+            printf("Make sure you pick a valid letter, i.e. (a-z)\n");
+        }
+
+        // Pick a letter that has NOT been picked yet
+        if (isalpha(guessedLetter) && (letters.find(guessedLetter) != std::string::npos))
+        {
+            printf("Make sure you pick a letter that has not been picked yet!\n");
+        }
+
+        // Meaning: Guessed letter not an alphabet letter OR in the letters list
+    } while (!isalpha(guessedLetter) || (letters.find(guessedLetter) != std::string::npos));
+
+    // Remove guessed letter from string of possible letters
     // @@ Remove from pool of possible letters (by check if already picked) ! {a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z}
+    letters.erase(std::remove(letters.begin(), letters.end(), guessedLetter), letters.end());
 
     return guessedLetter;
 };

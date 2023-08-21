@@ -1,2 +1,1 @@
-/* initialize random seed: */
-    srand(time(NULL));
+salpha(guessedLetter)
