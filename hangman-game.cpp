@@ -64,6 +64,9 @@ int main()
         // Check if the letter is in the set word
         bool checkForLetter;
         checkForLetter = checkLetterInWord(randomWord, letter);
+
+        // @@@ Preview: just a reminder
+        // std::cout << preview;
         if (checkForLetter == true)
         {
         }
@@ -86,10 +89,13 @@ char guessLetter(std::string &letters)
 
     do
     {
-        std::cout << "Guess a letter: "; // Type a number and press enter
-        std::cin >> guessedLetter;       // Get user input from the keyboard
+        std::cout << "Guess a letter: ";
+        std::cin >> guessedLetter; // Get user input from the keyboard
 
-        // @@@ LIMIT TO ONE letter
+        // Stopped here: @@@
+        // ??? @@@ Pointer? so that the string thats not been picked actually gets changed
+        // @@@ Preview
+        // @@@ Needs to repeat until lives are lost/string guessed
 
         // Checks if the letter isalphabet
         if (!isalpha(guessedLetter))
@@ -106,8 +112,10 @@ char guessLetter(std::string &letters)
         // Meaning: Guessed letter not an alphabet letter OR in the letters list
     } while (!isalpha(guessedLetter) || (letters.find(guessedLetter) != std::string::npos));
 
+    std::cout << "The first entered letter will be used: " << guessedLetter << "\n";
+
     // Remove guessed letter from string of possible letters
-    // @@ Remove from pool of possible letters (by check if already picked) ! {a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z}
+    // @@ Remove from pool of possible letters (by checking if already picked) ! {a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z}
     letters.erase(std::remove(letters.begin(), letters.end(), guessedLetter), letters.end());
 
     return guessedLetter;
