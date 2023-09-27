@@ -20,11 +20,12 @@ int main()
                              "Explorer", "Empty", "Assist", "Number",
                              "Sunny", "Ranger", "Messy", "Robot", "Pointer"};
 
-    // Letters that have NOT been picked
-    std::string alphabetLetters[26] = {"a", "b", "c", "d", "e", "f", "g", "h",
-                                       "i", "j", "k", "l", "m", "n", "o", "p",
-                                       "q", "r", "s", "t", "u", "v", "w", "x",
-                                       "y", "z"};
+    // // Letters that have NOT been picked
+    // std::string alphabetLetters[26] = {"a", "b", "c", "d", "e", "f", "g", "h",
+    //                                    "i", "j", "k", "l", "m", "n", "o", "p",
+    //                                    "q", "r", "s", "t", "u", "v", "w", "x",
+    //                                    "y", "z"};
+    std::string alphabetLetters = "abcdefghijklmnopqrstuvwxyz";
 
     //* Initialize random seed for the rand function: *
     // The random seed is initialized to a value
@@ -56,8 +57,8 @@ int main()
     while (timesGuessed < 8)
     {
         // @@@ Let the player guess a letter
-        letter = guessLetter(alphabetLetters[26]);
-        std::cout << alphabetLetters;
+        letter = guessLetter(alphabetLetters);
+        std::cout << "alphabetLetters: " << alphabetLetters;
 
         // Check if the letter is in the word to guess
         bool checkForLetter;
@@ -95,9 +96,8 @@ char guessLetter(std::string &letters)
         std::cin >> guessedLetter; // Get user input from the keyboard
 
         // Stopped here: @@@
-        // ??? 1@@@ Pointer? so that the string thats not been picked actually gets changed
+        // 1@@@ Remove guesssed letter from possible candidas
         // @@@ Preview
-        // @@@ Needs to repeat
         //      @currently guessed string needs to be displayed
 
         // Checks if the letter isalphabet
