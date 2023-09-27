@@ -38,7 +38,7 @@ int main()
     // Randomly pick word
     // std::string randomWord = words[randomIndex];
 
-    // Interim: Use "Number" as fixed word
+    // Interim: Use "Pointer" as fixed word
     std::string randomWord = "Pointer";
 
     // Initialize new variables
@@ -53,19 +53,18 @@ int main()
 
     char letter;
     int timesGuessed = 0;
-    if (timesGuessed < 8)
+    while (timesGuessed < 8)
     {
-        // @@ Print the CorrectlyGuessedWord up until this point
-        //
-
         // @@@ Let the player guess a letter
         letter = guessLetter(alphabetLetters[26]);
+        std::cout << alphabetLetters;
 
-        // Check if the letter is in the set word
+        // Check if the letter is in the word to guess
         bool checkForLetter;
         checkForLetter = checkLetterInWord(randomWord, letter);
 
-        // @@@ Preview: just a reminder
+        // @@@ Preview
+        // @@ Print the CorrectlyGuessedWord up until this point
         // std::cout << preview;
         if (checkForLetter == true)
         {
@@ -77,6 +76,9 @@ int main()
 
         // @@ Print lives left/timesGuessed
     };
+
+    // @@@ Correctly guessed the word "word"
+    // std::cout << "No more lives left";
 
     return 0;
 }
@@ -93,9 +95,10 @@ char guessLetter(std::string &letters)
         std::cin >> guessedLetter; // Get user input from the keyboard
 
         // Stopped here: @@@
-        // ??? @@@ Pointer? so that the string thats not been picked actually gets changed
+        // ??? 1@@@ Pointer? so that the string thats not been picked actually gets changed
         // @@@ Preview
-        // @@@ Needs to repeat until lives are lost/string guessed
+        // @@@ Needs to repeat
+        //      @currently guessed string needs to be displayed
 
         // Checks if the letter isalphabet
         if (!isalpha(guessedLetter))
@@ -103,7 +106,7 @@ char guessLetter(std::string &letters)
             printf("Make sure you pick a valid letter, i.e. (a-z)\n");
         }
 
-        // Pick a letter that has NOT been picked yet
+        //@@@ Pick a letter that has NOT been picked yet
         if (isalpha(guessedLetter) && (letters.find(guessedLetter) != std::string::npos))
         {
             printf("Make sure you pick a letter that has not been picked yet!\n");
@@ -112,6 +115,7 @@ char guessLetter(std::string &letters)
         // Meaning: Guessed letter not an alphabet letter OR in the letters list
     } while (!isalpha(guessedLetter) || (letters.find(guessedLetter) != std::string::npos));
 
+    // @@@ Currently entered string is split into single characters and all are used
     std::cout << "The first entered letter will be used: " << guessedLetter << "\n";
 
     // Remove guessed letter from string of possible letters
