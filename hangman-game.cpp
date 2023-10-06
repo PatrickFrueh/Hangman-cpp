@@ -113,7 +113,7 @@ char guessLetter(std::string &letters)
         }
 
         // Meaning: Guessed letter not an alphabet letter OR in the letters list
-    } while (!isalpha(guessedLetter) || (letters.find(guessedLetter) != std::string::npos));
+    } while (!isalpha(guessedLetter) || (letters.find(guessedLetter) == std::string::npos));
 
     // @@@ Currently entered string is split into single characters and all are used
     std::cout << "The first entered letter will be used: " << guessedLetter << "\n";
