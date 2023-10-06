@@ -85,7 +85,6 @@ int main()
 }
 
 // Defining functions
-// @@@ Call by reference?
 char guessLetter(std::string &letters)
 {
     char guessedLetter;
@@ -94,10 +93,6 @@ char guessLetter(std::string &letters)
     {
         std::cout << "Guess a letter: ";
         std::cin >> guessedLetter; // Get user input from the keyboard
-
-        // Stopped here: @@@
-        // @@@ Preview
-        //      @currently guessed string needs to be displayed
 
         // Checks if the letter isalphabet
         if (!isalpha(guessedLetter))
@@ -111,14 +106,12 @@ char guessLetter(std::string &letters)
             printf("Make sure you pick a letter that has not been picked yet!\n");
         }
 
-        // Meaning: Guessed letter not an alphabet letter OR in the letters list
+        // Guessed letter not an alphabet letter OR in the letters list
     } while (!isalpha(guessedLetter) || (letters.find(guessedLetter) == std::string::npos));
 
-    // @@@ Currently entered string is split into single characters and all are used
     std::cout << "The first entered letter will be used: " << guessedLetter << "\n";
 
     // Remove guessed letter from string of possible letters
-    // @@ Remove from pool of possible letters (by checking if already picked) ! {a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z}
     letters.erase(std::remove(letters.begin(), letters.end(), guessedLetter), letters.end());
 
     return guessedLetter;
