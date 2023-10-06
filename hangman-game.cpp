@@ -96,7 +96,7 @@ char guessLetter(std::string &letters)
         std::cin >> guessedLetter; // Get user input from the keyboard
 
         // Stopped here: @@@
-        // 1@@@ Remove guesssed letter from possible candidas
+        // 1@@@ Remove guesssed letter from possible candidates
         // @@@ Preview
         //      @currently guessed string needs to be displayed
 
@@ -106,8 +106,8 @@ char guessLetter(std::string &letters)
             printf("Make sure you pick a valid letter, i.e. (a-z)\n");
         }
 
-        //@@@ Pick a letter that has NOT been picked yet
-        if (isalpha(guessedLetter) && (letters.find(guessedLetter) != std::string::npos))
+        //@@@ Pick a letter that has NOT been picked yet: in letters -> NOT been picked
+        if (isalpha(guessedLetter) && !(letters.find(guessedLetter) != std::string::npos)) // found in string
         {
             printf("Make sure you pick a letter that has not been picked yet!\n");
         }
