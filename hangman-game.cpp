@@ -62,10 +62,6 @@ int main()
         checkForLetter = checkLetterInWord(randomWord, letter);
         std::cout << "+-+-+-+-+-+-+-+-+-+-+-+-+-+-+\n";
 
-        // @@@ Preview
-        //  @@ If index == 0 -> Capitalize Preview letter
-        //  @@ Print the CorrectlyGuessedWord up until this point
-
         // Preview with indices of correctly guessed letter
         int index = 0;
         while ((index = randomWord.find(letter, index)) != std::string::npos)
@@ -73,10 +69,9 @@ int main()
             std::cout << index << std::endl;
 
             // Place letter in the preview list
-            // @@ Capitalize if its the first letter
             if (index == 0)
             {
-                preview[(2 * index) + 2] = toupper(letter);
+                preview[(2 * index) + 2] = toupper(letter); // Capitalize if its the first letter
             }
             else
             {
@@ -85,7 +80,7 @@ int main()
 
             index += 1;
 
-            // @@ Needs to be somewhere else
+            // @@ Preview currently printed for every letter: move to prevent cluttering
             std::cout << "Correctly guessed letters: " << preview << "\n";
         }
 
