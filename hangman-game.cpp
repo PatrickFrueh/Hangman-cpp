@@ -21,10 +21,6 @@ int main()
                              "Sunny", "Ranger", "Messy", "Robot", "Pointer"};
 
     // // Letters that have NOT been picked
-    // std::string alphabetLetters[26] = {"a", "b", "c", "d", "e", "f", "g", "h",
-    //                                    "i", "j", "k", "l", "m", "n", "o", "p",
-    //                                    "q", "r", "s", "t", "u", "v", "w", "x",
-    //                                    "y", "z"};
     std::string alphabetLetters = "abcdefghijklmnopqrstuvwxyz";
 
     //* Initialize random seed for the rand function: *
@@ -40,7 +36,7 @@ int main()
     // std::string randomWord = words[randomIndex];
 
     // Interim: Use "Pointer" as fixed word
-    std::string randomWord = "Pointer";
+    std::string randomWord = "pointepr";
 
     // Initialize new variables
     // Generate preview using the length of the randomly generated word
@@ -52,21 +48,49 @@ int main()
     }
     preview += " ]";
 
+    std::cout << "Preview of the word to guess: " << preview << "\n";
+
     char letter;
     int timesGuessed = 0;
     while (timesGuessed < 8)
     {
-        // @@@ Let the player guess a letter
+        // Let the player guess a letter
         letter = guessLetter(alphabetLetters);
-        std::cout << "alphabetLetters: " << alphabetLetters;
 
         // Check if the letter is in the word to guess
         bool checkForLetter;
         checkForLetter = checkLetterInWord(randomWord, letter);
+        std::cout << "+-+-+-+-+-+-+-+-+-+-+-+-+-+-+\n";
 
         // @@@ Preview
-        // @@ Print the CorrectlyGuessedWord up until this point
-        // std::cout << preview;
+        //  @@ If index == 0 -> Capitalize Preview letter
+        //  @@ Print the CorrectlyGuessedWord up until this point
+
+        // Preview with indices of correctly guessed letter
+        int index = 0;
+        while ((index = randomWord.find(letter, index)) != std::string::npos)
+        {
+            std::cout << index << std::endl;
+
+            // Place letter in the preview list
+            // @@ Capitalize if its the first letter
+            if (index == 0)
+            {
+                preview[(2 * index) + 2] = toupper(letter);
+            }
+            else
+            {
+                preview[(2 * index) + 2] = letter;
+            }
+
+            index += 1;
+
+            // @@ Needs to be somewhere else
+            std::cout << "Correctly guessed letters: " << preview << "\n";
+        }
+
+        // @@@ Game Mechanics
+        //  @@ Lives left timesGuessed - sumStuff
         if (checkForLetter == true)
         {
         }
@@ -78,8 +102,15 @@ int main()
         // @@ Print lives left/timesGuessed
     };
 
-    // @@@ Correctly guessed the word "word"
-    // std::cout << "No more lives left";
+    // End of the game
+    if (timesGuessed == 8)
+    {
+        std::cout << "No more lives left!\nThe word to guess would have been: " << randomWord << "\n";
+    }
+    else
+    {
+        std::cout << "Correctly guessed the word:" << randomWord << "\n";
+    };
 
     return 0;
 }
@@ -120,20 +151,18 @@ char guessLetter(std::string &letters)
 // Check if the picked letter is part of the randomly picked word
 bool checkLetterInWord(std::string randomWord, char guessedLetter)
 {
-    // @@ Make randomWord, guessesdLetter small
+    // @@@ Make randomWord, guessesdLetter small
 
     // Check if the guessedLetter is in in the randomWord
     if (randomWord.find(guessedLetter) != std::string::npos)
     {
         std::cout << "The guessed letter is part of " << randomWord << std::endl;
-
-        // @@@ int indexRandomWord = randomWord.find(guessedLetter);
-        // --> Call by reference: change value of CorrectlyGuessedLetters
     }
     else
     {
         std::cout << "WRONG: " << randomWord << std::endl;
         return false;
     };
+
     return true;
 };
