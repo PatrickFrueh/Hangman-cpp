@@ -3,24 +3,29 @@
 #include <stdlib.h>
 #include <time.h>
 #include <ctype.h>
+#include <set>
 
 #include <algorithm>
 
 // Prototyping functions
-char guessLetter(std::string &letters);
+char guessLetter(std::string &letters, std::string &pickedLetters);
 bool checkLetterInWord(std::string randomWord, char guessedLetter);
+bool matchingCharactersofStrings(std::string &alphabetLetters, std::string randomWord);
 
 // Main
 int main()
 {
 
     // Initialize array of possible answers
-    std::string words[13] = {"Squat", "Dinner", "Laser", "Button",
-                             "Explorer", "Empty", "Assist", "Number",
-                             "Sunny", "Ranger", "Messy", "Robot", "Pointer"};
+    std::string words[13] = {"squat", "dinner", "laser", "button",
+                             "explorer", "empty", "assist", "number",
+                             "sunny", "ranger", "messy", "robot", "pointer"};
 
-    // // Letters that have NOT been picked
+    // Letters that have NOT been picked
     std::string alphabetLetters = "abcdefghijklmnopqrstuvwxyz";
+
+    // @@@ Letters that have BEEN picked
+    std::string pickedLetters = "";
 
     //* Initialize random seed for the rand function: *
     // The random seed is initialized to a value
@@ -35,7 +40,7 @@ int main()
     // std::string randomWord = words[randomIndex];
 
     // Interim: Use "Pointer" as fixed word
-    std::string randomWord = "pointepr";
+    std::string randomWord = "pointer";
 
     // Initialize new variables
     // Generate preview using the length of the randomly generated word
@@ -54,7 +59,7 @@ int main()
     while (timesGuessed < 8)
     {
         // Let the player guess a letter
-        letter = guessLetter(alphabetLetters);
+        letter = guessLetter(alphabetLetters, pickedLetters);
 
         // Check if the letter is in the word to guess
         bool checkForLetter;
@@ -89,25 +94,24 @@ int main()
             timesGuessed += 1;
             std::cout << "Remaining lives: " << (8 - timesGuessed) << std::endl;
         }
+
+        // End if the guessed letters match the dedicated word
+        if (matchingCharactersofStrings(pickedLetters, randomWord) == true)
+        {
+            preview.erase(remove(preview.begin(), preview.end(), '['), preview.end());
+            preview.erase(remove(preview.begin(), preview.end(), ']'), preview.end());
+            std::cout << "Correctly guessed the word:" << preview << std::endl;
+            break;
+        }
     };
 
-    // End of the game
-    // @@@ Winning doesn't actually lead to winning rn
-    if (timesGuessed == 8)
-    {
-        std::cout << "No more lives left!\nThe word to guess would have been: " << randomWord << std::endl;
-    }
-    else
-    {
-        // @@@ Check if all missing letters from string are in word
-        std::cout << "Correctly guessed the word:" << randomWord << std::endl;
-    };
+    std::cout << "No more lives left!\nThe word to guess would have been: " << randomWord << std::endl;
 
     return 0;
 }
 
 // Defining functions
-char guessLetter(std::string &letters)
+char guessLetter(std::string &letters, std::string &pickedLetters)
 {
     char guessedLetter;
 
@@ -135,6 +139,7 @@ char guessLetter(std::string &letters)
 
     // Remove guessed letter from string of possible letters
     letters.erase(std::remove(letters.begin(), letters.end(), guessedLetter), letters.end());
+    pickedLetters += guessedLetter;
 
     return guessedLetter;
 };
@@ -157,3 +162,15 @@ bool checkLetterInWord(std::string randomWord, char guessedLetter)
 
     return true;
 };
+
+// Check if string contains NONE of the characters
+bool matchingCharactersofStrings(std::string &alphabetLetters, std::string randomWord)
+{
+    std::set<char> s1(alphabetLetters.begin(), alphabetLetters.end());
+    std::set<char> s2(randomWord.begin(), randomWord.end());
+    std::set<char> result;
+    std::set_intersection(
+        s1.begin(), s1.end(), s2.begin(), s2.end(),
+        std::inserter(result, result.begin()));
+    return result == s2;
+}
