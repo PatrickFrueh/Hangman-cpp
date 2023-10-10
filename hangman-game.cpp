@@ -24,7 +24,7 @@ int main()
     // Letters that have NOT been picked
     std::string alphabetLetters = "abcdefghijklmnopqrstuvwxyz";
 
-    // @@@ Letters that have BEEN picked
+    // Letters that have BEEN picked
     std::string pickedLetters = "";
 
     //* Initialize random seed for the rand function: *
@@ -44,7 +44,7 @@ int main()
 
     // Initialize new variables
     // Generate preview using the length of the randomly generated word
-    // Letters at position: 3, 5, 7, 9, ...
+    // Letters at index: 2, 4, 6, 8, ...
     std::string preview = "[ _";
     for (int i = 0; i < randomWord.length() - 1; i++)
     {
@@ -64,7 +64,6 @@ int main()
         // Check if the letter is in the word to guess
         bool checkForLetter;
         checkForLetter = checkLetterInWord(randomWord, letter);
-        std::cout << "\n+-+-+-+-+-+-+-+-+-+-+-+-+-+-+\n";
 
         // Preview with indices of correctly guessed letter
         int index = 0;
@@ -83,6 +82,7 @@ int main()
             index += 1;
 
             std::cout << "Correctly guessed letters: " << preview << std::endl;
+            std::cout << "\n+-+-+-+-+-+-+-+-+-+-+-+-+-+-+\n";
         }
 
         // Display remaining lives
@@ -100,13 +100,16 @@ int main()
         {
             preview.erase(remove(preview.begin(), preview.end(), '['), preview.end());
             preview.erase(remove(preview.begin(), preview.end(), ']'), preview.end());
-            std::cout << "Correctly guessed the word:" << preview << std::endl;
+            std::cout << "Correctly guessed the word:" << preview << "\n"
+                      << std::endl;
             break;
         }
     };
 
-    std::cout << "No more lives left!\nThe word to guess would have been: " << randomWord << std::endl;
-
+    if (timesGuessed == 8)
+    {
+        std::cout << "No more lives left!\nThe word to guess would have been: " << randomWord << std::endl;
+    }
     return 0;
 }
 
@@ -118,7 +121,8 @@ char guessLetter(std::string &letters, std::string &pickedLetters)
     do
     {
         std::cout << "Guess a letter: ";
-        std::cin >> guessedLetter; // Get user input from the keyboard
+        std::cin >> guessedLetter;              // Get user input from the keyboard
+        guessedLetter = tolower(guessedLetter); // Lower capitalized letter
 
         // Checks if the letter isalphabet
         if (!isalpha(guessedLetter))
@@ -147,7 +151,6 @@ char guessLetter(std::string &letters, std::string &pickedLetters)
 // Check if the picked letter is part of the randomly picked word
 bool checkLetterInWord(std::string randomWord, char guessedLetter)
 {
-    // @@@ Make randomWord, guessesdLetter small
 
     // Check if the guessedLetter is in in the randomWord
     if (randomWord.find(guessedLetter) != std::string::npos)
