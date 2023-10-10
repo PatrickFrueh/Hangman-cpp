@@ -7,7 +7,6 @@
 #include <algorithm>
 
 // Prototyping functions
-// @@@ Call by reference?
 char guessLetter(std::string &letters);
 bool checkLetterInWord(std::string randomWord, char guessedLetter);
 
@@ -48,7 +47,7 @@ int main()
     }
     preview += " ]";
 
-    std::cout << "Preview of the word to guess: " << preview << "\n";
+    std::cout << "Preview of the word to guess: " << preview << std::endl;
 
     char letter;
     int timesGuessed = 0;
@@ -60,14 +59,12 @@ int main()
         // Check if the letter is in the word to guess
         bool checkForLetter;
         checkForLetter = checkLetterInWord(randomWord, letter);
-        std::cout << "+-+-+-+-+-+-+-+-+-+-+-+-+-+-+\n";
+        std::cout << "\n+-+-+-+-+-+-+-+-+-+-+-+-+-+-+\n";
 
         // Preview with indices of correctly guessed letter
         int index = 0;
         while ((index = randomWord.find(letter, index)) != std::string::npos)
         {
-            std::cout << index << std::endl;
-
             // Place letter in the preview list
             if (index == 0)
             {
@@ -80,31 +77,30 @@ int main()
 
             index += 1;
 
-            // @@ Preview currently printed for every letter: move to prevent cluttering
-            std::cout << "Correctly guessed letters: " << preview << "\n";
+            std::cout << "Correctly guessed letters: " << preview << std::endl;
         }
 
-        // @@@ Game Mechanics
-        //  @@ Lives left timesGuessed - sumStuff
+        // Display remaining lives
         if (checkForLetter == true)
         {
         }
         else
         {
             timesGuessed += 1;
+            std::cout << "Remaining lives: " << (8 - timesGuessed) << std::endl;
         }
-
-        // @@ Print lives left/timesGuessed
     };
 
     // End of the game
+    // @@@ Winning doesn't actually lead to winning rn
     if (timesGuessed == 8)
     {
-        std::cout << "No more lives left!\nThe word to guess would have been: " << randomWord << "\n";
+        std::cout << "No more lives left!\nThe word to guess would have been: " << randomWord << std::endl;
     }
     else
     {
-        std::cout << "Correctly guessed the word:" << randomWord << "\n";
+        // @@@ Check if all missing letters from string are in word
+        std::cout << "Correctly guessed the word:" << randomWord << std::endl;
     };
 
     return 0;
@@ -135,7 +131,7 @@ char guessLetter(std::string &letters)
         // Guessed letter not an alphabet letter OR in the letters list
     } while (!isalpha(guessedLetter) || (letters.find(guessedLetter) == std::string::npos));
 
-    std::cout << "The first entered letter will be used: " << guessedLetter << "\n";
+    std::cout << "The first entered letter will be used: " << guessedLetter << std::endl;
 
     // Remove guessed letter from string of possible letters
     letters.erase(std::remove(letters.begin(), letters.end(), guessedLetter), letters.end());
@@ -151,11 +147,11 @@ bool checkLetterInWord(std::string randomWord, char guessedLetter)
     // Check if the guessedLetter is in in the randomWord
     if (randomWord.find(guessedLetter) != std::string::npos)
     {
-        std::cout << "The guessed letter is part of " << randomWord << std::endl;
+        std::cout << "You guessed correctly!" << std::endl;
     }
     else
     {
-        std::cout << "WRONG: " << randomWord << std::endl;
+        std::cout << "You guessed incorrectly." << std::endl;
         return false;
     };
 
