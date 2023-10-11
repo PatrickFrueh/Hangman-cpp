@@ -52,7 +52,9 @@ int main()
     }
     preview += " ]";
 
-    std::cout << "Preview of the word to guess: " << preview << std::endl;
+    std::cout << "\nPreview of the word to guess: \n"
+              << preview << std::endl
+              << std::endl;
 
     char letter;
     int timesGuessed = 0;
@@ -81,8 +83,10 @@ int main()
 
             index += 1;
 
-            std::cout << "Correctly guessed letters: " << preview << std::endl;
-            std::cout << "\n+-+-+-+-+-+-+-+-+-+-+-+-+-+-+\n";
+            std::cout << "\nCorrectly guessed letters so far: \n"
+                      << preview << std::endl;
+            std::cout << "\n+-+-+-+-+-+-+-+-+-+-+-+-+-+-+\n"
+                      << std::endl;
         }
 
         // Display remaining lives
@@ -92,7 +96,13 @@ int main()
         else
         {
             timesGuessed += 1;
-            std::cout << "Remaining lives: " << (8 - timesGuessed) << std::endl;
+            std::cout << "X Remaining lives: " << (8 - timesGuessed) << std::endl
+                      << std::endl;
+            std::cout << "\nCorrectly guessed letters so far: \n"
+                      << preview << std::endl
+                      << std::endl;
+            std::cout << "\n+-+-+-+-+-+-+-+-+-+-+-+-+-+-+\n"
+                      << std::endl;
         }
 
         // End if the guessed letters match the dedicated word
@@ -108,7 +118,7 @@ int main()
 
     if (timesGuessed == 8)
     {
-        std::cout << "No more lives left!\nThe word to guess would have been: " << randomWord << std::endl;
+        std::cout << "No more lives left! You lost.\nThe word to guess would have been: " << randomWord << std::endl;
     }
     return 0;
 }
