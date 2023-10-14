@@ -19,8 +19,7 @@ $$ |  $$ |\$$$$$$$ |$$ |  $$ |\$$$$$$$ |$$ | \_/ $$ |\$$$$$$$ |$$ |  $$ |
 - [Feature Overview](#featureoverview)
 
 ## Description
-Hand detection using Google MediaPipe and multiple depth (stereovision) cameras.
-Alignment of point clouds; fusion of multiple landmarks using Unscented Kalman Filter.
+A basic C++ implementation of the word game *Hangman*. Visualization is limited to basic console outputs.
 
 ## Requirements
 * Knowledge on how the cult classic word game Hangman is played.
