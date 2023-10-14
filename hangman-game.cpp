@@ -37,10 +37,7 @@ int main()
     int randomIndex = std::rand() % 13;
 
     // Randomly pick word
-    // std::string randomWord = words[randomIndex];
-
-    // Interim: Use "Pointer" as fixed word
-    std::string randomWord = "pointer";
+    std::string randomWord = words[randomIndex];
 
     // Initialize new variables
     // Generate preview using the length of the randomly generated word
