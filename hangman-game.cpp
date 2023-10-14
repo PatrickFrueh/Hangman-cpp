@@ -4,7 +4,6 @@
 #include <time.h>
 #include <ctype.h>
 #include <set>
-
 #include <algorithm>
 
 // Prototyping functions
