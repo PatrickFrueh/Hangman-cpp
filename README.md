@@ -1,5 +1,4 @@
-
-
+---
                                                                            
     _/    _/                                _/      _/                     
    _/    _/    _/_/_/  _/_/_/      _/_/_/  _/_/  _/_/    _/_/_/  _/_/_/    
@@ -9,14 +8,11 @@ _/    _/    _/_/_/  _/    _/    _/_/_/  _/      _/    _/_/_/  _/    _/
                                    _/                                      
                               _/_/                                         
 
+---
 
 HangMan - Word Game
 ============                                                   
                                                                
-
-          
-## Table of Contents
-
 - [Description](#description)
 - [Requirements](#requirements)
 - [Installation](#installation)
