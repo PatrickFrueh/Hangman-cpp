@@ -9,7 +9,7 @@
 // Prototyping functions
 char guessLetter(std::string &letters, std::string &pickedLetters);
 bool checkLetterInWord(std::string randomWord, char guessedLetter);
-bool matchingCharactersofStrings(std::string &alphabetLetters, std::string randomWord);
+bool matchCharactersInString(std::string &alphabetLetters, std::string randomWord);
 
 // Main
 int main()
@@ -102,7 +102,7 @@ int main()
         }
 
         // End if the guessed letters match the dedicated word
-        if (matchingCharactersofStrings(pickedLetters, randomWord) == true)
+        if (matchCharactersInString(pickedLetters, randomWord) == true)
         {
             preview.erase(remove(preview.begin(), preview.end(), '['), preview.end());
             preview.erase(remove(preview.begin(), preview.end(), ']'), preview.end());
@@ -172,8 +172,8 @@ bool checkLetterInWord(std::string randomWord, char guessedLetter)
     return true;
 };
 
-// Check if string contains NONE of the characters
-bool matchingCharactersofStrings(std::string &alphabetLetters, std::string randomWord)
+// Check if string contains characters
+bool matchCharactersInString(std::string &alphabetLetters, std::string randomWord)
 {
     std::set<char> s1(alphabetLetters.begin(), alphabetLetters.end());
     std::set<char> s2(randomWord.begin(), randomWord.end());
